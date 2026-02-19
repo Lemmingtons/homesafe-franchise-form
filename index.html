@@ -6,7 +6,6 @@
   <title>Franchise Application — HomeSafe Inspections</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background: #f5f5f5;
       font-family: Arial, sans-serif;
@@ -16,7 +15,6 @@
       align-items: center;
       padding: 40px 20px 60px;
     }
-
     .card {
       background: #ffffff;
       border-radius: 8px;
@@ -25,82 +23,298 @@
       width: 100%;
       padding: 40px 48px 48px;
     }
-
-    .logo {
-      display: block;
-      margin: 0 auto 28px;
-      max-width: 220px;
-      height: auto;
+    .logo { display: block; margin: 0 auto 28px; max-width: 220px; height: auto; }
+    h1 { font-size: 24px; color: #1a1a1a; margin-bottom: 8px; text-align: center; }
+    .subtitle { font-size: 15px; color: #666; text-align: center; margin-bottom: 32px; line-height: 1.5; }
+    hr { border: none; border-top: 1px solid #eee; margin-bottom: 32px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; }
+    label .req { color: #c0392b; }
+    input[type=text], input[type=email], input[type=tel], select, textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px;
+      font-size: 14px; font-family: Arial, sans-serif; color: #333;
+      transition: border-color 0.2s;
     }
-
-    h1 {
-      font-size: 24px;
-      color: #1a1a1a;
-      margin-bottom: 8px;
-      text-align: center;
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2d7a3a; }
+    textarea { resize: vertical; min-height: 90px; }
+    select { background: #fff; cursor: pointer; }
+    .section-label {
+      font-size: 13px; font-weight: 700; color: #2d7a3a; text-transform: uppercase;
+      letter-spacing: 0.5px; margin: 28px 0 16px; border-top: 1px solid #eee; padding-top: 20px;
     }
-
-    .subtitle {
-      font-size: 15px;
-      color: #666;
-      text-align: center;
-      margin-bottom: 32px;
-      line-height: 1.5;
+    .sa-hint { font-size: 12px; color: #888; margin-bottom: 16px; }
+    .submit-btn {
+      background: #2d7a3a; color: #fff; border: none; padding: 14px 40px;
+      border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer;
+      width: 100%; margin-top: 12px; transition: background 0.2s;
     }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #eee;
-      margin-bottom: 32px;
+    .submit-btn:hover { background: #235f2d; }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+    .success-msg {
+      display: none; text-align: center; padding: 40px 20px;
+      color: #2d7a3a; font-size: 18px; font-weight: bold; line-height: 1.6;
     }
-
-    /* HubSpot form overrides */
-    .hs-form fieldset { max-width: 100% !important; }
-    .hs-form .hs-input { width: 100% !important; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-    .hs-form .hs-button.primary {
-      background: #2d7a3a !important;
-      color: #fff !important;
-      border: none !important;
-      padding: 12px 32px !important;
-      border-radius: 4px !important;
-      font-size: 15px !important;
-      font-weight: bold !important;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-    .hs-form .hs-button.primary:hover { background: #235f2d !important; }
-    .hs-form label { font-size: 13px; font-weight: 600; color: #333; }
-    .hs-error-msgs { color: #c0392b; font-size: 12px; }
-    .submitted-message { text-align: center; color: #2d7a3a; font-size: 16px; font-weight: bold; padding: 20px 0; }
-
-    @media (max-width: 600px) {
-      .card { padding: 28px 20px 36px; }
-    }
+    .error-msg { color: #c0392b; font-size: 13px; margin-top: 8px; display: none; }
+    @media (max-width: 600px) { .card { padding: 28px 20px 36px; } }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img
-      class="logo"
-      src="https://47894346.fs1.hubspotusercontent-na1.net/hubfs/47894346/HSI_Primary_black_green.png"
-      alt="HomeSafe Inspections"
-    />
-    <h1>Franchise Application</h1>
-    <p class="subtitle">
-      Takes about 10–15 minutes. Ryan will review and be in touch within 48 hours.
-    </p>
-    <hr class="divider" />
-    <div id="hubspot-form"></div>
+<div class="card">
+  <img class="logo"
+    src="https://47894346.fs1.hubspotusercontent-na1.net/hubfs/47894346/HSI_Primary_black_green.png"
+    alt="HomeSafe Inspections" />
+  <h1>Franchise Application</h1>
+  <p class="subtitle">Takes about 10–15 minutes. Ryan will review and be in touch within 48 hours.</p>
+  <hr />
+
+  <div id="form-wrap">
+    <form id="applicationForm" novalidate>
+
+      <div class="section-label">Your Details</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" name="firstname" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" name="lastname" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address <span class="req">*</span></label>
+        <input type="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" name="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label>Suburb / State <span class="req">*</span></label>
+        <input type="text" name="suburb_state" placeholder="e.g. Cronulla NSW" required />
+      </div>
+
+      <div class="section-label">Trade Background</div>
+
+      <div class="form-group">
+        <label>Current Occupation / Trade <span class="req">*</span></label>
+        <input type="text" name="current_occupation" required />
+      </div>
+
+      <div class="form-group">
+        <label>Years of Experience in Your Trade <span class="req">*</span></label>
+        <input type="text" name="years_trade_experience" placeholder="e.g. 10" required />
+      </div>
+
+      <div class="form-group">
+        <label>Do you hold a Cert 3 in Carpentry or Cert 4 in Building &amp; Construction?</label>
+        <select name="cert3_cert4_status">
+          <option value="">Select...</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="In progress">In Progress</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Do you hold a current Builder's Licence?</label>
+        <select name="builders_licence_status">
+          <option value="">Select...</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="In progress of obtaining">In Progress of Obtaining</option>
+        </select>
+      </div>
+
+      <div class="section-label">Territory &amp; Readiness</div>
+
+      <div class="form-group">
+        <label>Preferred Territory / Area <span class="req">*</span></label>
+        <input type="text" name="territory_of_interest" placeholder="e.g. Sutherland Shire" required />
+      </div>
+
+      <div class="form-group">
+        <label>Do you have access to a suitable work vehicle?</label>
+        <select name="work_vehicle_access">
+          <option value="">Select...</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>What capital do you have available to invest?</label>
+        <select name="fa_capital_to_invest">
+          <option value="">Select...</option>
+          <option value="Under $25k">Under $25k</option>
+          <option value="$25,000 – $40,000">$25,000 – $40,000</option>
+          <option value="$40,000 – $55,000">$40,000 – $55,000</option>
+          <option value="$55,000 – $80,000">$55,000 – $80,000</option>
+          <option value="$80,000+">$80,000+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>When are you looking to start?</label>
+        <select name="fa_start_timeline">
+          <option value="">Select...</option>
+          <option value="ASAP">ASAP</option>
+          <option value="Within 3 months">Within 3 months</option>
+          <option value="3–6 months">3–6 months</option>
+          <option value="6–12 months">6–12 months</option>
+          <option value="Just researching">Just researching</option>
+        </select>
+      </div>
+
+      <div class="section-label">Self Assessment</div>
+      <p class="sa-hint">Rate each statement honestly — 1 = Strongly Disagree, 5 = Strongly Agree</p>
+
+      <div class="form-group">
+        <label>I am self-motivated and able to work independently without supervision.</label>
+        <select name="sa1_self_motivated">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Delivering exceptional customer service is a core value I hold.</label>
+        <select name="sa2_customer_service">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>I understand the financial commitment involved and have a plan to fund it.</label>
+        <select name="sa3_financial_understanding">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>I handle setbacks and slow periods without losing motivation.</label>
+        <select name="sa4_resilience">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>I prefer to follow proven systems and processes rather than do things my own way.</label>
+        <select name="sa5_systems_preference">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>I am committed to building this business for 5+ years, not a quick return.</label>
+        <select name="sa6_long_term_commitment">
+          <option value="">Select...</option>
+          <option value="1">1 — Strongly Disagree</option>
+          <option value="2">2 — Disagree</option>
+          <option value="3">3 — Neutral</option>
+          <option value="4">4 — Agree</option>
+          <option value="5">5 — Strongly Agree</option>
+        </select>
+      </div>
+
+      <div class="section-label">Final Question</div>
+
+      <div class="form-group">
+        <label>Why do you want to own a HomeSafe Inspections franchise? <span class="req">*</span></label>
+        <textarea name="why_home_inspections" required placeholder="Tell us in your own words..."></textarea>
+      </div>
+
+      <div class="error-msg" id="errorMsg">Please fill in all required fields.</div>
+      <button type="submit" class="submit-btn" id="submitBtn">Submit My Application</button>
+    </form>
   </div>
 
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-  <script>
-    hbspt.forms.create({
-      region: "ap1",
-      portalId: "47894346",
-      formId: "d482dc4a-8983-4e32-bc5b-11b3b6fbf407",
-      target: "#hubspot-form"
+  <div class="success-msg" id="successMsg">
+    ✅ Thank you for applying!<br/>
+    <span style="font-size:15px;font-weight:normal;color:#555;">We'll review your application and be in touch within 48 hours.</span>
+  </div>
+</div>
+
+<script>
+  document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn = document.getElementById('submitBtn');
+    var errorMsg = document.getElementById('errorMsg');
+
+    // Basic validation
+    var required = form.querySelectorAll('[required]');
+    var valid = true;
+    required.forEach(function(field) {
+      if (!field.value.trim()) { valid = false; field.style.borderColor = '#c0392b'; }
+      else { field.style.borderColor = '#ddd'; }
     });
-  </script>
+
+    if (!valid) { errorMsg.style.display = 'block'; return; }
+    errorMsg.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    // Build form-encoded payload
+    var data = new URLSearchParams();
+    var inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(function(el) { if (el.name && el.value) data.append(el.name, el.value); });
+    data.append('hs_context', JSON.stringify({
+      pageUri: window.location.href,
+      pageName: 'Franchise Application — HomeSafe Inspections'
+    }));
+
+    fetch('https://forms.hubspot.com/uploads/form/v2/47894346/d482dc4a-8983-4e32-bc5b-11b3b6fbf407', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data.toString()
+    })
+    .then(function(resp) {
+      if (resp.ok || resp.status === 204) {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Submit My Application';
+        errorMsg.textContent = 'Something went wrong. Please try again.';
+        errorMsg.style.display = 'block';
+      }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Submit My Application';
+      errorMsg.textContent = 'Connection error. Please try again.';
+      errorMsg.style.display = 'block';
+    });
+  });
+</script>
 </body>
 </html>
