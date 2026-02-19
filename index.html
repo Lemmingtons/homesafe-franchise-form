@@ -252,6 +252,9 @@
         <textarea name="why_home_inspections" required placeholder="Tell us in your own words..."></textarea>
       </div>
 
+      <!-- Hidden fields: auto-set lifecycle stage on submission -->
+      <input type="hidden" name="lifecyclestage" value="opportunity" />
+
       <div class="error-msg" id="errorMsg">Please fill in all required fields.</div>
       <button type="submit" class="submit-btn" id="submitBtn">Submit My Application</button>
     </form>
