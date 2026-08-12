@@ -1,5 +1,7 @@
 # AGENTS.md — Homesafe franchise application form
 
+Inherit the universal instructions from `~/agent-workbench/AGENTS.md`.
+
 ## Scope and source of truth
 
 This repository is a single-page static franchise application form. `index.html` owns the UI, validation, HubSpot field mapping, submission endpoint, and success/error behavior.
