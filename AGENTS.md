@@ -40,4 +40,4 @@ Deleting applicant records, bulk editing CRM fields, replacing the live form end
 
 ## Verification
 
-Validate required/conditional fields, invalid input, duplicate-click protection, network failure, success state, keyboard flow, and mobile layout. For an authorized integration test, confirm the exact test record and field mapping in HubSpot without exposing applicant data.
+For copy or presentation changes, check the affected content/layout and keyboard behavior. For form-behavior changes, exercise the affected cases; run the full journey when shared validation or submission behavior changes: required/conditional fields, invalid input, duplicate-click protection, network failure, success state, keyboard flow, and mobile layout. For an authorized integration test, confirm the exact test record and field mapping in HubSpot without exposing applicant data.
